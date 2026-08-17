@@ -11,6 +11,9 @@
 @theme inline {
   --breakpoint-3xl: 1600px;
   --breakpoint-4xl: 2000px;
+  /* Vermelho da marca puxado um pouco pro roxo (não é o red-600 puro do Tailwind). */
+  --color-brand: #dc2660;
+  --color-brand-dark: #4c0f2c;
  --font-sans: "Nunito", Arial, ui-sans-serif, system-ui, sans-serif;
  --font-sans: "Nunito", Arial, ui-sans-serif, system-ui, sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
@@ -204,6 +207,37 @@
     display: none;
   }
 }
+
+/* ---- Identidade visual Alô Pará --------------------------------------
+   Referência: site oficial (preto quase puro, vermelho sólido, texto em
+   caixa alta com tracking, cantos discretos — nada de âmbar/degradê). */
+
+@utility brand-bg {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 60% 35% at 50% 0%, rgba(220, 38, 96, 0.16), transparent 60%),
+    radial-gradient(ellipse 55% 35% at 100% 100%, rgba(124, 58, 237, 0.10), transparent 65%),
+    #07050a;
+}
+
+@utility brand-card {
+  background: #100c14;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@utility brand-cta {
+  background: linear-gradient(135deg, #dc2660 0%, #b0257a 70%, #8b2fc9 130%);
+}
+
+@utility brand-outline-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+@utility brand-kicker {
+  letter-spacing: 0.14em;
+}
+
 
 html {
   color-scheme: light dark;

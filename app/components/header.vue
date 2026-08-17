@@ -3,19 +3,20 @@ import { Menu } from '@lucide/vue';
 import DropdownMenu from './ui/dropdown-menu/DropdownMenu.vue';
 import DropdownMenuTrigger from './ui/dropdown-menu/DropdownMenuTrigger.vue';
 import DropdownMenuContent from './ui/dropdown-menu/DropdownMenuContent.vue';
+import DropdownMenuItem from './ui/dropdown-menu/DropdownMenuItem.vue';
 
 </script>
 
 <template>
    
-        <header class="flex justify-between shadow-lg shadow-pink-200 items-center px-10 select-none">
+        <header class="flex justify-between items-center px-4 md:px-10 py-2.5 select-none bg-transparent">
 
             <div>
                 <DropdownMenu>
-                    <DropdownMenuTrigger>
-                        <Menu class="text-black"/>
+                    <DropdownMenuTrigger class="flex items-center justify-center w-9 h-9 rounded-lg border border-white/15 hover:border-white/30 hover:bg-white/5 active:bg-white/10 transition-colors duration-150">
+                        <Menu class="text-white" :size="16"/>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent class="w-60 bg-white text-black shadow-xl rounded-2xl p-2 border border-gray-100">
+                    <DropdownMenuContent class="w-60 bg-white text-black shadow-xl rounded-xl p-2 border border-gray-100">
   
 <!-- WhatsApp -->
 <DropdownMenuItem class="p-0 rounded-xl hover:bg-green-50 transition-colors group">
@@ -84,7 +85,7 @@ import DropdownMenuContent from './ui/dropdown-menu/DropdownMenuContent.vue';
             </div>
 
             <div>
-                <img class="w-40" src="../assets/img/logo.png" alt="">
+                <img class="w-34 md:w-32" src="../assets/img/logo.png" alt="Supermercado Alô Pará">
 
             </div>
 

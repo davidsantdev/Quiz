@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Header from '~/components/header.vue'
+
 const { perguntaAtual, indiceAtual, totalPerguntas,
         respostas, finalizado, responder, avancar } = useQuiz()
 
@@ -22,51 +24,51 @@ function avancarOuFinalizar() {
 </script>
 
 <template>
-  <div
-    class="min-h-screen flex flex-col items-center justify-center px-4 py-10"
-    style="background: linear-gradient(160deg, #fff0f5 0%, #ffe4ee 50%, #ffd6e7 100%); font-family: 'Nunito', sans-serif;"
-  >
+  <div class="brand-bg">
+    <Header />
 
-    <!-- header -->
-    <div class="w-full max-w-md mb-6">
-      <div class="flex justify-between items-center mb-2">
-        <span class="text-pink-400 text-sm font-semibold">Pergunta {{ indiceAtual + 1 }} de {{ totalPerguntas }}</span>
-        <span class="text-pink-300 text-sm">{{ progresso }}%</span>
+    <div class="flex flex-col items-center justify-center px-4 py-5">
+
+      <!-- header -->
+      <div class="w-full max-w-md mb-3.5">
+        <div class="flex justify-between items-center mb-1.5">
+          <span class="text-zinc-500 text-[11px] font-bold uppercase brand-kicker">Pergunta {{ indiceAtual + 1 }} de {{ totalPerguntas }}</span>
+          <span class="text-zinc-500 text-[11px] font-bold">{{ progresso }}%</span>
+        </div>
+
+        <!-- barra de progresso -->
+        <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+          <div
+            class="h-1.5 bg-brand rounded-full transition-all duration-500"
+            :style="{ width: progresso + '%' }"
+          />
+        </div>
       </div>
 
-      <!-- barra de progresso -->
-      <div class="w-full h-2 bg-pink-100 rounded-full overflow-hidden">
-        <div
-          class="h-2 bg-gradient-to-r from-pink-400 to-rose-400 rounded-full transition-all duration-500"
-          :style="{ width: progresso + '%' }"
-        />
+      <!-- card principal -->
+      <div class="w-full max-w-md rounded-xl shadow-xl overflow-hidden brand-card">
+        <transition name="slide" mode="out-in">
+          <PerguntaCard
+            :key="perguntaAtual?.id"
+            :pergunta="perguntaAtual"
+            :resposta-selecionada="respostaAtual"
+            @selecionar="responder"
+          />
+        </transition>
       </div>
+
+      <!-- botão próxima -->
+      <transition name="fade">
+        <button
+          v-if="respostaAtual !== null"
+          class="mt-5 px-8 py-3 rounded-lg text-white font-bold text-[13px] uppercase brand-kicker shadow-lg shadow-brand-dark/50 transition-all duration-200 active:scale-95 brand-cta"
+          @click="avancarOuFinalizar"
+        >
+          {{ finalizado ? 'Ver resultado' : 'Próxima pergunta' }}
+        </button>
+      </transition>
+
     </div>
-
-    <!-- card principal -->
-    <div
-      class="w-full max-w-md rounded-3xl shadow-xl overflow-hidden"
-      style="background: rgba(255,255,255,0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255,182,193,0.4);"
-    >
-      <PerguntaCard
-        :pergunta="perguntaAtual"
-        :resposta-selecionada="respostaAtual"
-        @selecionar="responder"
-      />
-    </div>
-
-    <!-- botão próxima -->
-    <transition name="fade">
-      <button
-        v-if="respostaAtual !== null"
-        class="mt-8 px-10 py-4 rounded-full text-white font-bold text-base shadow-lg transition-all duration-300 hover:scale-105 active:scale-95"
-        style="background: linear-gradient(135deg, #f472b6, #e11d48);"
-        @click="avancarOuFinalizar"
-      >
-        {{ finalizado ? '💌 Ver resultado' : 'Próxima →' }}
-      </button>
-    </transition>
-
   </div>
 </template>
 
@@ -77,5 +79,16 @@ function avancarOuFinalizar() {
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
   transform: translateY(10px);
+}
+.slide-enter-active, .slide-leave-active {
+  transition: opacity 0.25s, transform 0.25s;
+}
+.slide-enter-from {
+  opacity: 0;
+  transform: translateX(16px);
+}
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(-16px);
 }
 </style>

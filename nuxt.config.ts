@@ -1,15 +1,22 @@
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
-   modules: ['@nuxtjs/google-fonts'],
+  modules: [
+    '@nuxtjs/google-fonts',
+    '@vueuse/nuxt',
+    '@nuxt/eslint',
+    '@nuxt/icon',
+    '@pinia/nuxt',
+    '@nuxtjs/color-mode',
+    '@nuxt/fonts'
+  ],
 
   googleFonts: {
     families: {
-      'Nunito': [900]
+      'Nunito': [700, 800, 900],
+      'Inter': [400, 500, 600, 700]
     }
   },
-
-
 
   compatibilityDate: '2026-05-25',
   devtools: { enabled: true },
@@ -19,15 +26,6 @@ export default defineNuxtConfig({
   alias: {
     '@': '/app'
   },
-
-  modules: [
-    '@vueuse/nuxt',
-    '@nuxt/eslint',
-    '@nuxt/icon',
-    '@pinia/nuxt',
-    '@nuxtjs/color-mode',
-    '@nuxt/fonts'
-  ],
 
   vite: {
     plugins: [tailwindcss()],
